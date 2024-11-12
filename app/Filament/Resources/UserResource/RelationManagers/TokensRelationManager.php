@@ -24,9 +24,6 @@ class TokensRelationManager extends RelationManager
                 Tables\Columns\IconColumn::make('revoked')
                     ->boolean(),
             ])
-            ->filters([
-                //
-            ])
             ->actions([
                 Tables\Actions\Action::make('revoke')
                     ->label('Revoke')
