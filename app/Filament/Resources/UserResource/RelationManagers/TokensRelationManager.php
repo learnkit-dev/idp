@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\UserResource\RelationManagers;
 
+use App\Filament\Actions\RevokeTableAction;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
@@ -25,16 +26,8 @@ class TokensRelationManager extends RelationManager
                     ->boolean(),
             ])
             ->actions([
-                Tables\Actions\Action::make('revoke')
-                    ->label('Revoke')
-                    ->requiresConfirmation()
-                    ->visible(fn (Token $record): bool => $record->revoked === false)
-                    ->icon('heroicon-m-hand-raised')
-                    ->action(function (Token $record): void {
-                        $record->update([
-                            'revoked' => true,
-                        ]);
-                    }),
+                RevokeTableAction::make(),
+
                 DeleteAction::make()
                     ->visible(fn (Token $record): bool => $record->revoked === true),
             ]);

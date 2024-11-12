@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Actions\RevokeTableAction;
 use App\Filament\Resources\TokenResource\Pages;
 use Laravel\Passport\Token;
 use Filament\Resources\Resource;
@@ -41,6 +42,9 @@ class TokenResource extends Resource
                     ->preload(),
                 Tables\Filters\TernaryFilter::make('revoked')
                     ->label('Revoked'),
+            ])
+            ->actions([
+                RevokeTableAction::make(),
             ])
             ->defaultSort('created_at', 'desc');
     }
